@@ -9,7 +9,8 @@ const currentWeather = (lat, lon, callback) => {
         else if (body.error) console.log('Weather data not found!', undefined);
         else callback(undefined, body.current.weather_descriptions[0] + ". It is currently " 
                                  + body.current.temperature + " degrees outside. It feels like " 
-                                 + body.current.feelslike + " degrees.");
+                                 + body.current.feelslike + " degrees. The UV index is "
+                                 + body.current.uv_index);
     })
 
 };
