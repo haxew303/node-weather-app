@@ -11,7 +11,7 @@ const getMap = (lat, lon, wlat, wlon, callback) => {
     const url = baseURL + mapPath + params;
     request({url, encoding: null}, (error, {headers, body}) => {
         if (error) callback('Could not connect to the mapping service.', undefined);
-        if (headers["content-type"] !== "image/png") callback('ERROR: Could not retrieve a valid map', undefined);
+        if (headers["content-type"] !== "image/png") callback(undefined, "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=");
         else {
             const map = "data:image/png;base64," + Buffer.from(body).toString('base64');
             callback(undefined, map);
