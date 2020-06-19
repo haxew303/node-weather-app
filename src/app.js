@@ -3,6 +3,7 @@ const express = require('express');
 const hbs = require('hbs');
 const geocode = require('./utils/geocode.js');
 const currentWeather = require('./utils/currentWeather.js');
+const getMap = require('./utils/getMap.js');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -47,13 +48,17 @@ app.get('/weather', (req, res) => {
     if (!req.query.address) return res.send({error: 'You must provide an address'});
     geocode(req.query.address, (error, {lat, lon, location} = {}) => {
         if (error) return res.send({error});
-        currentWeather(lat, lon, (error, weather) => {
+        currentWeather(lat, lon, (error, {wlat, wlon, weather}) => {
             if (error) return res.send({error});
-            res.send({
-                address: req.query.address,
-                location,
-                weather 
-            })
+            getMap(lat, lon, wlat, wlon, (error, map) => {
+                if (error) return res.send({error});
+                res.send({
+                    address: req.query.address,
+                    location,
+                    weather,
+                    map
+                });
+            });
         });
     });
 });
