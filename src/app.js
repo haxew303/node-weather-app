@@ -25,14 +25,14 @@ app.use(express.static(pubdir));
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather App',
-        name: 'Donald'
+        name: 'Donald Skelton'
     });
 });
 
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About',
-        name: 'Donald'
+        name: 'Donald Skelton'
     });
 });
 
@@ -40,7 +40,7 @@ app.get('/help', (req, res) => {
     res.render('help', {
         helpMessage: 'Provide a location, and get the current weather.',
         title: 'Help',
-        name: 'Donald'
+        name: 'Donald Skelton'
     });
 });
 
@@ -63,22 +63,10 @@ app.get('/weather', (req, res) => {
     });
 });
 
-app.get('/products', (req, res) => {
-    if (!req.query.search) {
-        return res.send({
-            error: 'You must provide a search term.'
-        })
-    }
-    console.log(req.query.search);
-    res.send({
-        products: [],
-    });
-});
-
 app.get('/help/*', (req, res) => {
     res.render('404', {
         title: '404 - Not Found',
-        name: 'Donald',
+        name: 'Donald Skelton',
         error: 'Help article not found.'
     });
 });
@@ -86,7 +74,7 @@ app.get('/help/*', (req, res) => {
 app.get('*', (req, res) => {
     res.render('404', {
         title: '404 - Not Found',
-        name: 'Donald',
+        name: 'Donald Skelton',
         error: 'Page not found.'
     });
 });
